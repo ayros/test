@@ -14,7 +14,7 @@ public class Area {
         Cell[][] area = new Cell[N][M];
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                area[i][j] = new Cell(Entity.EMPTY, j, i, false);
+                area[i][j] = new Cell(Entity.EMPTY, false);
             }
         }
 
