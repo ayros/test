@@ -2,7 +2,7 @@ package com.alex;
 
 public class Movement extends Action {
 
-    public Movement(Position pos, Entity entity, Direction direct) {
+    Movement(Position pos, Entity entity, Direction direct) {
         super(pos, entity, direct);
         actionName = "Movement";
     }
@@ -28,6 +28,9 @@ public class Movement extends Action {
             y = direction.getY(y);
             x = direction.getX(x);
             area[y][x].setEntity(entity);
+        }
+        if (entity.equals(Entity._CAT_)) {
+            area[y][x].setRoad(false);
         }
 
         if (entity.equals(Entity._CAT_)) {

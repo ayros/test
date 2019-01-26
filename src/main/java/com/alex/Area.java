@@ -3,10 +3,10 @@ package com.alex;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class Area {
+class Area {
 
-    public final static int N = 10;
-    public final static int M = 12;
+    final static int N = 10;
+    final static int M = 12;
 
     private Deque<Position> positions = new LinkedList<Position>();
 
@@ -28,26 +28,43 @@ public class Area {
             area[i][M - 1].setEntity(Entity.FULL_);
         }
 
-        for (int i = 1; i < M - 1; i++) {
-            area[5][i].setRoad(true);
+        for (int i = 2; i < M - 1; i++) {
+            area[N - 3][i].setRoad(true);
         }
+        int x_cat, y_cat, x_dog, y_dog;
+        x_cat = 1;
+        y_cat = 1;
+        x_dog = M - 2;
+        y_dog = 1;
+        area[y_cat][x_cat].setEntity(Entity._CAT_);
+        area[y_dog][x_dog].setEntity(Entity._DOG_);
 
-        area[1][1].setEntity(Entity._CAT_);
-        area[N - 2][M - 2].setEntity(Entity._DOG_);
-
-        Position position = new Position(area, 1, 1, M - 2, N - 2);
+        Position position = new Position(area, x_cat, y_cat, x_dog, y_dog);
         positions.addFirst(position);
     }
 
-    public void step() {
-
+    boolean actionLeft() {
+        Position position = positions.peekFirst();
+        if (position.actionLeft()) {
+            return true;
+        }
+        return false;
     }
 
-    public Position getPosition() {
+    void step() {
+        Position position = positions.peekFirst();
+        positions.addFirst(position.nextPosition());
+    }
+
+    void stepBack() {
+        positions.removeFirst();
+    }
+
+    Position getPosition() {
         return positions.peekFirst();
     }
 
-    public void info() {
+    void info() {
         for (Position pos : positions) {
             pos.info();
             pos.actionsInfo();

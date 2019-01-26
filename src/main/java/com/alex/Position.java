@@ -3,7 +3,7 @@ package com.alex;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Position {
+class Position {
 
     private Cell[][] area;
     private final int x_cat, x_dog, y_cat, y_dog;
@@ -12,12 +12,6 @@ public class Position {
 
     Position(Cell[][] area, int x_cat, int y_cat, int x_dog, int y_dog) {
         this.area = area;
-        /*this.area = new Cell[Area.N][Area.M];
-        for (int i = 0; i < Area.N; i++) {
-            for (int j = 0; j < Area.M; j++) {
-                this.area[i][j] = new Cell(area[i][j].getEntity(), j, i, area[i][j].isRoad());
-            }
-        }*/
         this.x_cat = x_cat;
         this.x_dog = x_dog;
         this.y_dog = y_dog;
@@ -47,7 +41,7 @@ public class Position {
         }
     }
 
-    public boolean is_victory() {
+    boolean is_victory() {
         for (int i = 0; i < Area.N; i++) {
             for (int j = 0; j < Area.M; j++) {
                 if (area[i][j].isRoad()) {
@@ -58,7 +52,7 @@ public class Position {
         return true;
     }
 
-    public void info() {
+    void info() {
         for (int i = 0; i < Area.N; i++) {
             for (int j = 0; j < Area.M; j++) {
                 if (area[i][j].getEntity().toString().equals(" Cat ")) {
@@ -76,10 +70,24 @@ public class Position {
         System.out.println();
     }
 
-    public void nextPosition() {
-
+    boolean actionLeft() {
+        if (cat_action.isEmpty() && dog_action.isEmpty()) {
+            return false;
+        }
+        return true;
     }
-    public void actionsInfo() {
+
+    Position nextPosition() {
+        Action action;
+        if (!cat_action.isEmpty()) {
+            action = cat_action.remove();
+        } else {
+            action = dog_action.remove();
+        }
+        return action.act();
+    }
+
+    void actionsInfo() {
         System.out.println();
         for (Action direction : cat_action) {
             System.out.println(direction.toString());
@@ -89,23 +97,23 @@ public class Position {
         }
     }
 
-    public int getX_cat() {
+    int getX_cat() {
         return x_cat;
     }
 
-    public int getX_dog() {
+    int getX_dog() {
         return x_dog;
     }
 
-    public int getY_cat() {
+    int getY_cat() {
         return y_cat;
     }
 
-    public int getY_dog() {
+    int getY_dog() {
         return y_dog;
     }
 
-    public Cell[][] getArea() {
+    Cell[][] getArea() {
         return area;
     }
 }
