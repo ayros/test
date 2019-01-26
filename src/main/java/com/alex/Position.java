@@ -35,9 +35,9 @@ class Position {
                 dog_action.add(new Movement(this, Entity._DOG_, direction));
                 continue;
             }
-            /*if (area[direction.getY(y_dog)][direction.getX(x_dog)].getEntity().equals(Entity.ROCK)) {
-                dog_action.add(direction);
-            }*/
+            if (area[direction.getY(y_dog)][direction.getX(x_dog)].getEntity().equals(Entity.ROCK)) {
+                dog_action.add(new Destruction(this, Entity._DOG_, direction));
+            }
         }
     }
 

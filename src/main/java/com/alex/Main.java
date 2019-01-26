@@ -8,7 +8,7 @@ public class Main {
         Area area = new Area();
 
 
-        game(area, 4);
+        game(area, 5);
         area.info();
     }
 

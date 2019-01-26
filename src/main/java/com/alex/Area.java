@@ -31,6 +31,9 @@ class Area {
         for (int i = 2; i < M - 1; i++) {
             area[N - 3][i].setRoad(true);
         }
+
+        area[1][M - 3].setEntity(Entity.ROCK);
+        area[1][M - 3].setRoad(true);
         int x_cat, y_cat, x_dog, y_dog;
         x_cat = 1;
         y_cat = 1;
