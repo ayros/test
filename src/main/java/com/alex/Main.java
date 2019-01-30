@@ -7,9 +7,11 @@ public class Main {
 
         Area area = new Area();
 
-
-        game(area, 5);
+        long start = System.currentTimeMillis();
+        game(area, 10);
         area.info();
+        long end = (System.currentTimeMillis() - start);
+        System.out.println("Время: " + end);
     }
 
     private static boolean game(Area pos, int fuel) {

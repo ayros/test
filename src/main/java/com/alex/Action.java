@@ -5,13 +5,14 @@ public abstract class Action {
     protected final Direction direction;
     protected final Position start;
     protected final Entity entity;
-
+    protected int count;
     protected String actionName = "Action";
 
-    public Action(Position pos, Entity entity, Direction direct) {
+    public Action(Position pos, Entity entity, Direction direct, int count) {
         direction = direct;
         start = pos;
         this.entity = entity;
+        this.count = count;
     }
 
     public abstract Position act();

@@ -2,9 +2,10 @@ package com.alex;
 
 public class Movement extends Action {
 
-    Movement(Position pos, Entity entity, Direction direct) {
-        super(pos, entity, direct);
+    Movement(Position pos, Entity entity, Direction direct, int count) {
+        super(pos, entity, direct, count);
         actionName = "Movement";
+        //System.out.println(this.count + toString());
     }
 
     @Override
@@ -21,10 +22,11 @@ public class Movement extends Action {
         }
 
         while (area[direction.getY(y)][direction.getX(x)].getEntity().isAvailable()) {
-            if (entity.equals(Entity._CAT_)) {
+            if (area[y][x].isRoad() && entity.equals(Entity._CAT_)) {
                 area[y][x].setRoad(false);
+                count--;
             }
-            area[y][x].setEntity(Entity.EMPTY);
+            area[y][x].setEntity(Entity.empty);
             y = direction.getY(y);
             x = direction.getX(x);
             area[y][x].setEntity(entity);
@@ -34,9 +36,9 @@ public class Movement extends Action {
         }
 
         if (entity.equals(Entity._CAT_)) {
-            return new Position(area, x, y, start.getX_dog(), start.getY_dog());
+            return new Position(area, x, y, start.getX_dog(), start.getY_dog(), count);
         } else {
-            return new Position(area, start.getX_cat(), start.getY_cat(), x, y);
+            return new Position(area, start.getX_cat(), start.getY_cat(), x, y, count);
         }
 
     }

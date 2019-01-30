@@ -7,24 +7,29 @@ class Position {
 
     private Cell[][] area;
     private final int x_cat, x_dog, y_cat, y_dog;
+    private int count = 10;
     private Queue<Action> cat_action = new LinkedList<Action>();
     private Queue<Action> dog_action = new LinkedList<Action>();
 
-    Position(Cell[][] area, int x_cat, int y_cat, int x_dog, int y_dog) {
+    Position(Cell[][] area, int x_cat, int y_cat, int x_dog, int y_dog, int count) {
         this.area = area;
         this.x_cat = x_cat;
         this.x_dog = x_dog;
         this.y_dog = y_dog;
         this.y_cat = y_cat;
+        this.count = count;
+        //System.out.println(count);
 
         checkCat();
         checkDog();
+        //System.out.println(count);
     }
 
     private void checkCat() {
         for (Direction direction : Direction.values()) {
             if (area[direction.getY(y_cat)][direction.getX(x_cat)].getEntity().isAvailable()) {
-                cat_action.add(new Movement(this, Entity._CAT_, direction));
+                //System.out.println(count);
+                cat_action.add(new Movement(this, Entity._CAT_, direction, count));
             }
         }
     }
@@ -32,24 +37,23 @@ class Position {
     private void checkDog() {
         for (Direction direction : Direction.values()) {
             if (area[direction.getY(y_dog)][direction.getX(x_dog)].getEntity().isAvailable()) {
-                dog_action.add(new Movement(this, Entity._DOG_, direction));
+                //System.out.println(count);
+                dog_action.add(new Movement(this, Entity._DOG_, direction, count));
                 continue;
             }
             if (area[direction.getY(y_dog)][direction.getX(x_dog)].getEntity().equals(Entity.ROCK)) {
-                dog_action.add(new Destruction(this, Entity._DOG_, direction));
+                //System.out.println(count);
+                dog_action.add(new Destruction(this, Entity._DOG_, direction, count));
             }
         }
     }
 
     boolean is_victory() {
-        for (int i = 0; i < Area.N; i++) {
-            for (int j = 0; j < Area.M; j++) {
-                if (area[i][j].isRoad()) {
-                    return false;
-                }
-            }
+        if (count <= 0) {
+            return true;
+        } else {
+            return false;
         }
-        return true;
     }
 
     void info() {

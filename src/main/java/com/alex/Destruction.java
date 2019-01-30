@@ -2,8 +2,8 @@ package com.alex;
 
 public class Destruction extends Action {
 
-    public Destruction(Position pos, Entity entity, Direction direct) {
-        super(pos, entity, direct);
+    public Destruction(Position pos, Entity entity, Direction direct, int count) {
+        super(pos, entity, direct, count);
         actionName = "Destruction";
     }
 
@@ -13,7 +13,7 @@ public class Destruction extends Action {
         int y = direction.getY(start.getY_dog());
 
         Cell[][] area = copyArea(start.getArea());
-        area[y][x].setEntity(Entity.EMPTY);
-        return new Position(area, start.getX_cat(), start.getY_cat(), start.getX_dog(), start.getY_dog());
+        area[y][x].setEntity(Entity.empty);
+        return new Position(area, start.getX_cat(), start.getY_cat(), start.getX_dog(), start.getY_dog(), count);
     }
 }

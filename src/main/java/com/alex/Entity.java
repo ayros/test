@@ -2,7 +2,7 @@ package com.alex;
 
 public enum Entity {
 
-    EMPTY {
+    empty {
         public boolean isAvailable() {
             return true;
         }
