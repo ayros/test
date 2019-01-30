@@ -18,17 +18,14 @@ class Position {
         this.y_dog = y_dog;
         this.y_cat = y_cat;
         this.count = count;
-        //System.out.println(count);
 
         checkCat();
         checkDog();
-        //System.out.println(count);
     }
 
     private void checkCat() {
         for (Direction direction : Direction.values()) {
             if (area[direction.getY(y_cat)][direction.getX(x_cat)].getEntity().isAvailable()) {
-                //System.out.println(count);
                 cat_action.add(new Movement(this, Entity._CAT_, direction, count));
             }
         }
@@ -37,12 +34,10 @@ class Position {
     private void checkDog() {
         for (Direction direction : Direction.values()) {
             if (area[direction.getY(y_dog)][direction.getX(x_dog)].getEntity().isAvailable()) {
-                //System.out.println(count);
                 dog_action.add(new Movement(this, Entity._DOG_, direction, count));
                 continue;
             }
             if (area[direction.getY(y_dog)][direction.getX(x_dog)].getEntity().equals(Entity.ROCK)) {
-                //System.out.println(count);
                 dog_action.add(new Destruction(this, Entity._DOG_, direction, count));
             }
         }
