@@ -6,7 +6,7 @@ public enum Entity {
         public boolean isAvailable() {
             return true;
         }
-    }, FULL_, ROCK, _CAT_, _DOG_;
+    }, FULL_, ROCK_, _CAT_, _DOG_, ROAD_;
 
     public boolean isAvailable() {
         return false;

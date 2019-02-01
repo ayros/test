@@ -8,24 +8,28 @@ public class Main {
         Area area = new Area();
 
         long start = System.currentTimeMillis();
-        game(area, 10);
-        area.info();
+        game(area);
         long end = (System.currentTimeMillis() - start);
-        System.out.println("Время: " + end);
+        //area.positionsInfo();
+        area.info();
+        System.out.println("Время: " + end + "мс");
     }
 
-    private static boolean game(Area pos, int fuel) {
+    private static boolean game(Area pos) {
         if (pos.getPosition().is_victory()) {
             System.out.println("Victory");
             return true;
         }
-        if (fuel == 0) {
+        if (pos.getPosition().getFuel() == 0) {
             return false;
         }
         while (pos.actionLeft()) {
-            pos.step();
-            if (game(pos, fuel - 1)) {
-                return true;
+            if (pos.step()) {
+                if (game(pos)) {
+                    return true;
+                } else {
+                    pos.stepBack();
+                }
             } else {
                 pos.stepBack();
             }

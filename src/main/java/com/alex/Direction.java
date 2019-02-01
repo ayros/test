@@ -1,32 +1,31 @@
 package com.alex;
 
 public enum Direction {
+
     UP {
-        int getY(int y) {
-            return y - 1;
+        int get(int cell) {
+            return cell - M;
         }
     },
     DOWN {
-        int getY(int y) {
-            return y + 1;
+        int get(int cell) {
+            return cell + M;
         }
     },
     LEFT {
-        int getX(int x) {
-            return x - 1;
+        int get(int cell) {
+            return cell - 1;
         }
     },
     RIGHT {
-        int getX(int x) {
-            return x + 1;
+        int get(int cell) {
+            return cell + 1;
         }
     };
 
-    int getX(int x) {
-        return x;
-    }
+    public static final int M = 13;
+    public static final int N = 10;
 
-    int getY(int y) {
-        return y;
-    }
+
+    abstract int get(int cell);
 }
