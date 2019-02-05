@@ -1,4 +1,4 @@
-package com.alex;
+package com.alex.test.controller;
 
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +15,7 @@ public class Destruction extends Action {
         Map<Entity, Set<Integer>> entities = copy(start.getEntities());
         int x = direction.get(start.getDog());
 
-        entities.get(Entity.ROCK_).remove(x);
+        entities.get(Entity.ROCK).remove(x);
         return new Position(entities, fuel);
     }
 }

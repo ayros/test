@@ -1,12 +1,12 @@
-package com.alex;
+package com.alex.test.controller;
 
 public enum Entity {
 
-    empty {
+    EMPTY {
         public boolean isAvailable() {
             return true;
         }
-    }, FULL_, ROCK_, _CAT_, _DOG_, ROAD_;
+    }, FULL, ROCK, CAT, DOG, ROAD, ICE, WATER;
 
     public boolean isAvailable() {
         return false;

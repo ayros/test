@@ -1,4 +1,4 @@
-package com.alex;
+package com.alex.test.controller;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,29 +23,40 @@ public abstract class Action {
     public static Map<Entity, Set<Integer>> copy(Map<Entity, Set<Integer>> map) {
         Map<Entity, Set<Integer>> copy = new HashMap<Entity, Set<Integer>>();
         Set<Integer> copyRock = new HashSet<Integer>();
-        for (int i : map.get(Entity.ROCK_)) {
+        for (int i : map.get(Entity.ROCK)) {
             copyRock.add(i);
         }
-        copy.put(Entity.ROCK_, copyRock);
+        copy.put(Entity.ROCK, copyRock);
 
         Set<Integer> copyRoad = new HashSet<Integer>();
-        for (int i : map.get(Entity.ROAD_)) {
+        for (int i : map.get(Entity.ROAD)) {
             copyRoad.add(i);
         }
-        copy.put(Entity.ROAD_, copyRoad);
+        copy.put(Entity.ROAD, copyRoad);
 
         Set<Integer> copyCat = new HashSet<Integer>();
-        for (int i : map.get(Entity._CAT_)) {
+        for (int i : map.get(Entity.CAT)) {
             copyCat.add(i);
         }
-        copy.put(Entity._CAT_, copyCat);
+        copy.put(Entity.CAT, copyCat);
 
         Set<Integer> copyDog = new HashSet<Integer>();
-        for (int i : map.get(Entity._DOG_)) {
+        for (int i : map.get(Entity.DOG)) {
             copyDog.add(i);
         }
-        copy.put(Entity._DOG_, copyDog);
+        copy.put(Entity.DOG, copyDog);
 
+        Set<Integer> copyICE = new HashSet<Integer>();
+        for (int i : map.get(Entity.ICE)) {
+            copyICE.add(i);
+        }
+        copy.put(Entity.ICE, copyICE);
+
+        Set<Integer> copyWater = new HashSet<Integer>();
+        for (int i : map.get(Entity.WATER)) {
+            copyWater.add(i);
+        }
+        copy.put(Entity.WATER, copyWater);
         return copy;
     }
     @Override

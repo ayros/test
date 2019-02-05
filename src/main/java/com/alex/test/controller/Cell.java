@@ -1,4 +1,4 @@
-package com.alex;
+package com.alex.test.controller;
 
 public class Cell {
 
@@ -15,7 +15,6 @@ public class Cell {
     public boolean isRoad() {
         return road;
     }
-
     public void setRoad(boolean road) {
         this.road = road;
     }

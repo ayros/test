@@ -1,4 +1,4 @@
-package com.alex;
+package com.alex.test.controller;
 
 public enum Direction {
 
@@ -23,8 +23,8 @@ public enum Direction {
         }
     };
 
-    public static final int M = 13;
-    public static final int N = 10;
+    public static final int M = 15;
+    public static final int N = 11;
 
 
     abstract int get(int cell);

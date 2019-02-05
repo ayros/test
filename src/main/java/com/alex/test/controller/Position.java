@@ -1,11 +1,11 @@
-package com.alex;
+package com.alex.test.controller;
 
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-class Position {
+class Position implements Info {
 
     private static Set<Integer> area;
     private Map<Entity, Set<Integer>> entities;
@@ -25,7 +25,7 @@ class Position {
         for (Direction direction : Direction.values()) {
             cell = direction.get(getCat());
             if (isEmpty(cell)) {
-                cat_action.add(new Movement(this, Entity._CAT_, direction));
+                cat_action.add(new Movement(this, Entity.CAT, direction));
             }
         }
     }
@@ -34,18 +34,18 @@ class Position {
         int cell;
         for (Direction direction : Direction.values()) {
             cell = direction.get(getDog());
-            if (entities.get(Entity.ROCK_).contains(cell)) {
-                dog_action.add(new Destruction(this, Entity._DOG_, direction));
+            if (entities.get(Entity.ROCK).contains(cell)) {
+                dog_action.add(new Destruction(this, Entity.DOG, direction));
                 continue;
             }
             if (isEmpty(cell)) {
-                dog_action.add(new Movement(this, Entity._DOG_, direction));
+                dog_action.add(new Movement(this, Entity.DOG, direction));
             }
         }
     }
 
     boolean is_victory() {
-        if (entities.get(Entity.ROAD_).isEmpty()) {
+        if (entities.get(Entity.ROAD).isEmpty()) {
             return true;
         } else {
             return false;
@@ -56,28 +56,28 @@ class Position {
         Cell[][] area = new Cell[Direction.N][Direction.M];
         for (int i = 0; i < Direction.N; i++) {
             for (int j = 0; j < Direction.M; j++) {
-                area[i][j] = new Cell(Entity.empty, false);
+                area[i][j] = new Cell(Entity.EMPTY, false);
             }
         }
         for (Integer i : this.area) {
-            area[i / Direction.M][i % Direction.M].setEntity(Entity.FULL_);
+            area[i / Direction.M][i % Direction.M].setEntity(Entity.FULL);
         }
-        for (Integer i : entities.get(Entity.ROCK_)) {
-            area[i / Direction.M][i % Direction.M].setEntity(Entity.ROCK_);
+        for (Integer i : entities.get(Entity.ROCK)) {
+            area[i / Direction.M][i % Direction.M].setEntity(Entity.ROCK);
         }
-        for (Integer i : entities.get(Entity.ROAD_)) {
+        for (Integer i : entities.get(Entity.ROAD)) {
             area[i / Direction.M][i % Direction.M].setRoad(true);
         }
-        for (Integer i : entities.get(Entity._CAT_)) {
-            area[i / Direction.M][i % Direction.M].setEntity(Entity._CAT_);
+        for (Integer i : entities.get(Entity.CAT)) {
+            area[i / Direction.M][i % Direction.M].setEntity(Entity.CAT);
         }
-        for (Integer i : entities.get(Entity._DOG_)) {
-            area[i / Direction.M][i % Direction.M].setEntity(Entity._DOG_);
+        for (Integer i : entities.get(Entity.DOG)) {
+            area[i / Direction.M][i % Direction.M].setEntity(Entity.DOG);
         }
 
         for (int i = 0; i < Direction.N; i++) {
             for (int j = 0; j < Direction.M; j++) {
-                if (area[i][j].isRoad() && area[i][j].getEntity().equals(Entity.empty)) {
+                if (area[i][j].isRoad() && area[i][j].getEntity().equals(Entity.EMPTY)) {
                     System.out.print("road  ");
                     continue;
                 }
@@ -97,7 +97,8 @@ class Position {
     }
 
     public boolean isEmpty(int cell) {
-        if (area.contains(cell) || entities.get(Entity.ROCK_).contains(cell) || (cell == getCat()) || (cell == getDog())) {
+        if (area.contains(cell) || entities.get(Entity.ROCK).contains(cell) || entities.get(Entity.WATER).contains(cell)
+                || (cell == getCat()) || (cell == getDog())) {
             return false;
         }
         return true;
@@ -124,14 +125,14 @@ class Position {
     }
 
     int getCat() {
-        for (int cat : entities.get(Entity._CAT_)) {
+        for (int cat : entities.get(Entity.CAT)) {
             return cat;
         }
         return 0;
     }
 
     int getDog() {
-        for (int dog : entities.get(Entity._DOG_)) {
+        for (int dog : entities.get(Entity.DOG)) {
             return dog;
         }
         return 0;
@@ -161,6 +162,21 @@ class Position {
 
     public int getFuel() {
         return fuel;
+    }
+
+    @Override
+    public Set<Integer> getCoordinates(Entity entity) {
+        return entities.get(entity);
+    }
+
+    @Override
+    public boolean contains(Entity entity) {
+        return entities.containsKey(entity);
+    }
+
+    @Override
+    public String toString() {
+        return "fuel=" + fuel;
     }
 }
 
